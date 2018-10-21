@@ -4,6 +4,8 @@
  
 # IntelliJ
 *.iml
-/.idea/
-/out/
-/target/
+idea/
+.idea/
+out/
+target/
+project/

@@ -12,9 +12,19 @@ class MessageActorSpec extends FunSpecLike with Matchers {
     describe("given one message") {
       it("should store the message") {
         val messageActor = TestActorRef(new MessageActor)
-        messageActor ! "Hello"
+        messageActor ! "Hello!"
         val message = messageActor.underlyingActor.message
-        message should equal("Hello")
+        message should equal("Hello!")
+      }
+    }
+
+    describe("given two messages") {
+      it("should store the second message") {
+        val messageActor = TestActorRef(new MessageActor)
+        messageActor ! "hello"
+        messageActor ! "world"
+        val message = messageActor.underlyingActor.message
+        message should equal("world")
       }
     }
   }

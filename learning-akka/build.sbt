@@ -1,6 +1,8 @@
-name := """futures-examples"""
+name := """learning-akka"""
 
-version := "1.0"
+organization := "com.akkademy-db"
+
+version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.5"
 
@@ -13,3 +15,9 @@ libraryDependencies ++= Seq(
   "junit"             % "junit"           % "4.11"  % "test",
   "com.novocode"      % "junit-interface" % "0.11" % "test"
 )
+
+mappings in (Compile, packageBin) ~= {
+  _.filterNot {
+    case (_, resourceName) => Seq("application.conf").contains(resourceName)
+  }
+}

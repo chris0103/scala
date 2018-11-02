@@ -1,10 +1,16 @@
 package com.akkademy
 
-import akka.actor.{Actor, Status}
+import akka.actor.{Actor, ActorSystem, Props, Status}
 import akka.event.Logging
 import com.akkademy.messages.{GetRequest, KeyNotFoundException, SetRequest}
 
 import scala.collection.mutable
+
+object Main extends App {
+
+  val system = ActorSystem("akkademy")
+  val actor = system.actorOf(Props[AkkademyDb], "akkademy-db")
+}
 
 class AkkademyDb extends Actor {
 

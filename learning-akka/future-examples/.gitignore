@@ -1,7 +1,3 @@
-*.class
-*.log
-
- 
 # IntelliJ
 *.iml
 idea/

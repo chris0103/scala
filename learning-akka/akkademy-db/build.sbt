@@ -1,6 +1,4 @@
-name := """learning-akka"""
-
-organization := "com.akkademy-db"
+name := """akkademy-db"""
 
 version := "0.0.1-SNAPSHOT"
 

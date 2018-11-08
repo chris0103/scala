@@ -14,7 +14,7 @@ object Main extends App {
 
 class AkkademyDb extends Actor {
 
-  val map = new mutable.HashMap[String, String]
+  val map = new mutable.HashMap[String, Object]
 
   val log = Logging(context.system, this)
 
@@ -24,7 +24,7 @@ class AkkademyDb extends Actor {
       map.put(key, value)
     case GetRequest(key) =>
       log.info("received GetRequest - key: {}", key)
-      val response: Option[String] = map.get(key)
+      val response: Option[Object] = map.get(key)
       response match {
         case Some(x) => sender() ! x
         case None => sender() ! Status.Failure(KeyNotFoundException(key))

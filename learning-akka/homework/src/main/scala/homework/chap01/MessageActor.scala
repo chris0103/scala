@@ -1,6 +1,6 @@
 package homework.chap01
 
-import akka.actor.Actor
+import akka.actor.{Actor, Status}
 
 class MessageActor extends Actor {
 
@@ -8,5 +8,6 @@ class MessageActor extends Actor {
 
   override def receive: Receive = {
     case str : String => message = str
+    case _ => sender() ! Status.Failure(new Exception("unknown message"))
   }
 }

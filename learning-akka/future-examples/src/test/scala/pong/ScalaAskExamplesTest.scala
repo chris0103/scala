@@ -64,7 +64,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
       c should equal("Pong")
     }
 
-    //doesn't actually test anything - demonstrates an effect. next test shows assertion.
+    // doesn't actually test anything - demonstrates an effect. next test shows assertion.
     it("should effect on failure") {
       askPong("causeError").onFailure {
         case _: Exception => println("Got exception")

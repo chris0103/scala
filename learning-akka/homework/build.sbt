@@ -1,4 +1,4 @@
-name := """akkademy-db"""
+name := """learning-akka-homework"""
 
 version := "0.0.1-SNAPSHOT"
 

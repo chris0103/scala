@@ -1,22 +1,22 @@
 package com.akkademy
 
-import akka.actor.{Actor, ActorSystem, Props, Status}
-import akka.event.Logging
+import akka.actor.{Actor, ActorRef, ActorSystem, Props, Status}
+import akka.event.{Logging, LoggingAdapter}
 import com.akkademy.messages.{GetRequest, KeyNotFoundException, SetRequest}
 
 import scala.collection.mutable
 
 object Main extends App {
 
-  val system = ActorSystem("akkademy")
-  val actor = system.actorOf(Props[AkkademyDb], "akkademy-db")
+  val system: ActorSystem = ActorSystem("akkademy")
+  val actor: ActorRef = system.actorOf(Props[AkkademyDb], "akkademy-db")
 }
 
 class AkkademyDb extends Actor {
 
-  val map = new mutable.HashMap[String, Object]
+  val map: mutable.Map[String, Object] = new mutable.HashMap[String, Object]
 
-  val log = Logging(context.system, this)
+  val log: LoggingAdapter = Logging(context.system, this)
 
   override def receive: PartialFunction[Any, Unit] = {
     case SetRequest(key, value) =>

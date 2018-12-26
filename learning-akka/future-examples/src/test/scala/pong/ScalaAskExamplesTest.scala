@@ -67,7 +67,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
     // doesn't actually test anything - demonstrates an effect. next test shows assertion.
     it("should effect on failure") {
       askPong("causeError").onFailure {
-        case _: Exception => println("Got exception")
+        case _ : Exception => println("Got exception")
       }
     }
 
@@ -77,7 +77,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
     it("should effect on failure (with assertion)") {
       val res = Promise()
       askPong("causeError").onFailure {
-        case _: Exception =>
+        case _ : Exception =>
           res.failure(new Exception("failed!"))
       }
 
@@ -89,7 +89,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
 
     it("should recover on failure") {
       val f = askPong("causeError").recover({
-        case _: Exception => "default"
+        case _ : Exception => "default"
       })
       val result = Await.result(f, 1 second)
       result should equal("default")
@@ -97,7 +97,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
 
     it("should recover on failure async") {
       val f = askPong("causeError").recoverWith({
-        case _: Exception => askPong("Ping")
+        case _ : Exception => askPong("Ping")
       })
       val result = Await.result(f, 1 second)
       result should equal("Pong")
@@ -105,7 +105,7 @@ class ScalaAskExamplesTest extends FunSpecLike with Matchers {
 
     it("should chain together multiple operations") {
       val f = askPong("Ping").flatMap(x => askPong("Ping" + x)).recover({
-        case _: Exception => "There was an error"
+        case _ : Exception => "There was an error"
       })
       val result = Await.result(f, 1 second)
       result should equal("There was an error")

@@ -15,7 +15,7 @@ class StringReverseService {
 
   val actor: ActorRef = system.actorOf(Props[StringReverseActor])
 
-  def reverseString : Future[Any] = {
-    actor ? "hello"
+  def reverseString(msg : Any) : Future[Any] = {
+    actor ? msg
   }
 }

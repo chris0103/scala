@@ -10,17 +10,21 @@ class StringReverseServiceSpec extends FunSpecLike with Matchers {
   val service : StringReverseService = new StringReverseService()
 
   describe("string reverse service") {
-    describe("should reverse a string") {
-      val future : Future[Any] = service.reverseString("hello")
-      val result: String = Await.result(future.mapTo[String], 2 seconds)
-      result should equal("olleh")
+    describe("given a string") {
+      it("should reverse the string") {
+        val future : Future[Any] = service.reverseString("hello")
+        val result: String = Await.result(future.mapTo[String], 2 seconds)
+        result should equal("olleh")
+      }
     }
 
-    describe("should fail on non-string type") {
-      val future : Future[Any] = service.reverseString(new Object())
-      intercept[Exception] {
-        val result = Await.result(future.mapTo[String], 2 seconds)
-        result should equal("unknown message")
+    describe("given unknown type") {
+      it("should fail on unknown types") {
+        val future : Future[Any] = service.reverseString(new Object())
+        intercept[Exception] {
+          val result = Await.result(future.mapTo[String], 2 seconds)
+          result should equal("unknown message")
+        }
       }
     }
   }

@@ -15,7 +15,11 @@ class StringReverseService {
 
   val actor: ActorRef = system.actorOf(Props[StringReverseActor])
 
-  def reverseString(msg : Any) : Future[Any] = {
-    actor ? msg
+  def reverseString(msg : Any) : Future[String] = {
+    import scala.concurrent.ExecutionContext.Implicits.global
+
+    (actor ? msg).mapTo[String].recover({
+      case e : Exception => e.getMessage
+    })
   }
 }

@@ -1,5 +1,7 @@
 name := """learning-akka-future-examples"""
 
+organization := "org.chris.study"
+
 version := "0.0.1-SNAPSHOT"
 
 scalaVersion := "2.11.5"

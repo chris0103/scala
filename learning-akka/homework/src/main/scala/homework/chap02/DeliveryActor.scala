@@ -5,10 +5,8 @@ import akka.util.Timeout
 import akka.pattern.ask
 import pong.ScalaPongActor
 
-import scala.concurrent.Future
+import scala.concurrent.{Await, ExecutionContextExecutor, Future}
 import scala.concurrent.duration._
-
-import scala.concurrent.ExecutionContextExecutor
 
 class DeliveryActor extends Actor with ActorLogging {
 
@@ -29,7 +27,9 @@ class DeliveryActor extends Actor with ActorLogging {
     case msg : String =>
       log.info("Received {}.", msg)
       val senderActor: ActorRef = sender()
-      senderActor ! service.reverseString(msg)
+      service.reverseString(msg).onSuccess({
+        case msg => senderActor ! msg
+      })
     case x =>
       println("unknown message " + x.getClass)
   }
